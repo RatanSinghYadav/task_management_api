@@ -15,7 +15,7 @@ const getTaskDetail = async (req, res) => {
 
         const details = await Tasks.findById(id);
 
-        // Check if the course with the given ID exists
+        
         if (!details) {
             return res.status(404).json({ success: false, message: "Task not found." });
         }

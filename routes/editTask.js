@@ -16,7 +16,7 @@ const editTaskDetail = async (req, res) => {
 
         const details = await Tasks.findById(id);
 
-        // Check if the course with the given ID exists
+        
         if (!details) {
             return res.status(404).json({ success: false, message: "Task not found." });
         }
@@ -39,7 +39,7 @@ const updateTaskDetail = async (req, res) => {
 
         const { title, descriptions, status, priority } = req.body;
         
-        console.log(title, descriptions, status, priority)
+        // console.log(title, descriptions, status, priority)
 
         // Additional validation using express-validator
         const validationErrors = validationResult(req);
