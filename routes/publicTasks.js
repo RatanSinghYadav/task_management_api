@@ -1,10 +1,7 @@
 const Tasks = require("../models/task");
-const Users = require("../models/user");
 
-const getAllTasks = async (req, res) => {
+const getPublicTask = async (req, res) => {
     try {
-        const id = req.userId;
-        // console.log(id)
 
         const { page = 1, pageSize = 20, search } = req.query;
 
@@ -19,14 +16,9 @@ const getAllTasks = async (req, res) => {
             }
         }
 
-        const user = await Users.findById({ _id: id });
-        // console.log(usersTasks);
+        
 
-        const tasks = await Tasks.find({ ...searchOptions, _id: { $in: user.tasks } })
-            .skip((page - 1) * pageSize)
-            .limit(parseInt(pageSize))
-            .select('title descriptions startDate dueDate priority status');
-
+        const tasks = await Tasks.find({ ...searchOptions }).skip((page - 1) * pageSize).limit(parseInt(pageSize))
 
         const totalTasks = await Tasks.countDocuments(searchOptions);
         const pageCount = await Math.ceil(totalTasks / pageSize);
@@ -47,4 +39,4 @@ const getAllTasks = async (req, res) => {
     }
 }
 
-module.exports = getAllTasks;
+module.exports = getPublicTask;
