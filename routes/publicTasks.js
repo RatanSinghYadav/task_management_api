@@ -3,7 +3,7 @@ const Tasks = require("../models/task");
 const getPublicTask = async (req, res) => {
     try {
 
-        const { page = 1, pageSize = 20, search } = req.query;
+        const { page = 1, pageSize = 50, search } = req.query;
 
         let searchOptions = {};
 
@@ -19,6 +19,7 @@ const getPublicTask = async (req, res) => {
         
 
         const tasks = await Tasks.find({ ...searchOptions }).skip((page - 1) * pageSize).limit(parseInt(pageSize))
+        // console.log(tasks)
 
         const totalTasks = await Tasks.countDocuments(searchOptions);
         const pageCount = await Math.ceil(totalTasks / pageSize);

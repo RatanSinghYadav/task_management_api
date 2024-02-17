@@ -6,7 +6,7 @@ const getAllTasks = async (req, res) => {
         const id = req.userId;
         // console.log(id)
 
-        const { page = 1, pageSize = 20, search } = req.query;
+        const { page = 1, pageSize = 50, search } = req.query;
 
         let searchOptions = {};
 
