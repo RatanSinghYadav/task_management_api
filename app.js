@@ -14,9 +14,9 @@ const corsOption = {
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Set-Cookie', 'Token']
 }
-
+ 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); 
 app.use(cookie());
 app.use(cors(corsOption));
 app.use(route);

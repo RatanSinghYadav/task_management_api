@@ -6,7 +6,7 @@ const User = require("../models/user.js");
 const addTask = async (req, res) => {
     try {
         const Id = req.userId;
-        const { title, descriptions, priority, status, startDate, dueDate } = req.body;
+        const { title, deptName, deptNumber, deptEmail, assignedTo, descriptions, priority,remark, status, startDate, dueDate } = req.body;
 
         // console.log(title, descriptions, priority, status, startDate, dueDate);
 
@@ -14,8 +14,13 @@ const addTask = async (req, res) => {
 
         const createTask = new Tasks({
             title: title,
+            deptName: deptName,
+            deptNumber: deptNumber,
+            deptEmail: deptEmail,
+            assignedTo: assignedTo,
             descriptions: descriptions,
             priority: priority,
+            remark:remark,
             status: status,
             startDate: startDate,
             dueDate: dueDate,
@@ -28,6 +33,7 @@ const addTask = async (req, res) => {
         await user.tasks.push(taskSaved._id);
 
         const updatedUser = await user.save();
+        // console.log(updatedUser);
 
         res.status(201).json({ success: true, message: "task added successfyll!", updatedUser, taskSaved })
 
