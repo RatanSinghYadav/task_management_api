@@ -5,6 +5,22 @@ const taskSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    deptName: {
+        type: String,
+        default: null
+    },
+    deptNumber: {
+        type: String,
+        defalut: null
+    },
+    deptEmail: {
+        type: String,
+        default: null
+    },
+    assignedTo: {
+        type: String,
+        default: null
+    },
     descriptions: {
         type: String,
         default: null
@@ -14,6 +30,10 @@ const taskSchema = new mongoose.Schema({
         default: null
     },
     dueDate: {
+        type: String,
+        default: null
+    },
+    remark: {
         type: String,
         default: null
     },

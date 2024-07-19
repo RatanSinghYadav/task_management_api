@@ -25,7 +25,7 @@ const getAllTasks = async (req, res) => {
         const tasks = await Tasks.find({ ...searchOptions, _id: { $in: user.tasks } })
             .skip((page - 1) * pageSize)
             .limit(parseInt(pageSize))
-            .select('title descriptions startDate dueDate priority status');
+            .select('title deptName deptNumber deptEmail assignedTo descriptions startDate dueDate priority status remark');
 
 
         const totalTasks = await Tasks.countDocuments(searchOptions);

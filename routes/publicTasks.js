@@ -20,12 +20,13 @@ const getPublicTask = async (req, res) => {
 
         const tasks = await Tasks.find({ ...searchOptions }).skip((page - 1) * pageSize).limit(parseInt(pageSize))
         // console.log(tasks)
+        const reverseTasks = tasks.reverse();
 
         const totalTasks = await Tasks.countDocuments(searchOptions);
         const pageCount = await Math.ceil(totalTasks / pageSize);
 
         res.status(200).json({
-            success: true, message: "Data found successfully", tasks,
+            success: true, message: "Data found successfully", reverseTasks,
             pagination: {
                 currentPage: parseInt(page),
                 pageSize: parseInt(pageSize),

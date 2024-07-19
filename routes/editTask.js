@@ -16,7 +16,7 @@ const editTaskDetail = async (req, res) => {
 
         const details = await Tasks.findById(id);
 
-        
+
         if (!details) {
             return res.status(404).json({ success: false, message: "Task not found." });
         }
@@ -37,8 +37,8 @@ const updateTaskDetail = async (req, res) => {
 
         // console.log(_id)
 
-        const { title, descriptions, status, priority } = req.body;
-        
+        const { title, deptName, deptNumber, deptEmail, assignedTo, descriptions, priority, remark, status, startDate, dueDate } = req.body;
+
         // console.log(title, descriptions, status, priority)
 
         // Additional validation using express-validator
@@ -52,9 +52,16 @@ const updateTaskDetail = async (req, res) => {
             { _id: _id },
             {
                 title: title,
+                deptName: deptName,
+                deptNumber: deptNumber,
+                deptEmail: deptEmail,
+                assignedTo: assignedTo,
                 descriptions: descriptions,
-                status: status,
                 priority: priority,
+                remark: remark,
+                status: status,
+                startDate: startDate,
+                dueDate: dueDate,
             },
             { new: true }
         );
