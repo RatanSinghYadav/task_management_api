@@ -19,7 +19,7 @@ const taskSchema = new mongoose.Schema({
     },
     assignedTo: {
         type: String,
-        default: null
+        default: null 
     },
     descriptions: {
         type: String,
@@ -44,7 +44,7 @@ const taskSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['Start', 'Ongoing', 'Done', 'On hold'],
+        enum: ['Start', 'Ongoing', 'Done', 'On hold', 'Cancel'],
         default: 'Start'
     },
     user: {
