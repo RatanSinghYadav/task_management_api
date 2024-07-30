@@ -3,7 +3,7 @@ const Tasks = require("../models/task");
 const getPublicTask = async (req, res) => {
     try {
 
-        const { page = 1, pageSize = 50, search } = req.query;
+        const { page = 1, pageSize = 5000, search } = req.query;
 
         let searchOptions = {};
 
