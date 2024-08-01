@@ -6,9 +6,33 @@ const getAllTasks = async (req, res) => {
         const id = req.userId;
         // console.log(id)
 
-        const { page = 1, pageSize = 500, search } = req.query;
+
+        const { page = 1, pageSize = 5000, search } = req.query;
+
+        const { startDate, dueDate, title, deptName, deptEmail, assignedTo, descriptions, priority, status  } = req.query;
+        console.log(startDate, dueDate)
+
+        const filter = {};
+
+        if (startDate) {
+            filter.startDate = { $gte: startDate };
+        }
+        if (dueDate) {
+            filter.dueDate = { $lte: dueDate };
+        }
+
+        // if (title) {
+        //     const ititleName = title.split(',')
+        //     filter.title = { $in: ititleName };
+        // }
+        // if (deptName) {
+        //     const deptName = deptName.split(',')
+        //     filter.deptName = { $in: deptName };
+        // }
 
         let searchOptions = {};
+
+        
 
         if (search) {
             searchOptions = {
@@ -19,10 +43,13 @@ const getAllTasks = async (req, res) => {
             }
         }
 
+        // Merge searchOptions and filter
+        const combinedFilter = { ...filter, ...searchOptions };
+
         const user = await Users.findById({ _id: id });
         // console.log(usersTasks);
 
-        const tasks = await Tasks.find({ ...searchOptions, _id: { $in: user.tasks } })
+        const tasks = await Tasks.find({ ...combinedFilter, _id: { $in: user.tasks } })
             .skip((page - 1) * pageSize)
             .limit(parseInt(pageSize))
             .select('title deptName deptNumber deptEmail assignedTo descriptions startDate dueDate priority status remark');
