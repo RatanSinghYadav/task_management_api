@@ -5,6 +5,7 @@ const getPublicTask = async (req, res) => {
 
         const { page = 1, pageSize = 5000, search } = req.query;
 
+
         const { startDate, dueDate, title, deptName, deptEmail, assignedTo, descriptions, priority, status } = req.query;
         console.log(startDate, dueDate)
 
@@ -25,6 +26,7 @@ const getPublicTask = async (req, res) => {
         //     const deptName = deptName.split(',')
         //     filter.deptName = { $in: deptName };
         // }
+      
 
         let searchOptions = {};
 
