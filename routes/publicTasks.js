@@ -3,7 +3,28 @@ const Tasks = require("../models/task");
 const getPublicTask = async (req, res) => {
     try {
 
-        const { page = 1, pageSize = 50, search } = req.query;
+        const { page = 1, pageSize = 5000, search } = req.query;
+
+        const { startDate, dueDate, title, deptName, deptEmail, assignedTo, descriptions, priority, status } = req.query;
+        console.log(startDate, dueDate)
+
+        const filter = {};
+
+        if (startDate) {
+            filter.startDate = { $gte: startDate };
+        }
+        if (dueDate) {
+            filter.dueDate = { $lte: dueDate };
+        }
+
+        // if (title) {
+        //     const ititleName = title.split(',')
+        //     filter.title = { $in: ititleName };
+        // }
+        // if (deptName) {
+        //     const deptName = deptName.split(',')
+        //     filter.deptName = { $in: deptName };
+        // }
 
         let searchOptions = {};
 
@@ -16,10 +37,11 @@ const getPublicTask = async (req, res) => {
             }
         }
 
-        
+        // Merge searchOptions and filter
+        const combinedFilter = { ...filter, ...searchOptions };
 
-        const tasks = await Tasks.find({ ...searchOptions }).skip((page - 1) * pageSize).limit(parseInt(pageSize))
-        console.log(tasks)
+        const tasks = await Tasks.find({ ...combinedFilter }).skip((page - 1) * pageSize).limit(parseInt(pageSize))
+        // console.log(tasks)
 
         const totalTasks = await Tasks.countDocuments(searchOptions);
         const pageCount = await Math.ceil(totalTasks / pageSize);
