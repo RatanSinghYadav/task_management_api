@@ -44,7 +44,7 @@ const taskSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['Start', 'Ongoing', 'Done', 'On hold', 'Cancel'],
+        enum: ['Start', 'Ongoing', 'Done', 'On hold', 'Cancel', 'Close'],
         default: 'Start'
     },
     user: {
