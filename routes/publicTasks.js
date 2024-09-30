@@ -42,7 +42,7 @@ const getPublicTask = async (req, res) => {
         // Merge searchOptions and filter
         const combinedFilter = { ...filter, ...searchOptions };
 
-        const tasks = await Tasks.find({ ...combinedFilter }).skip((page - 1) * pageSize).limit(parseInt(pageSize))
+        const tasks = await Tasks.find({ ...combinedFilter }).sort({ createdAt: -1 }).skip((page - 1) * pageSize).limit(parseInt(pageSize))
         // console.log(tasks)
 
         const totalTasks = await Tasks.countDocuments(searchOptions);
