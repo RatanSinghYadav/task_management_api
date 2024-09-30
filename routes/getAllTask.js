@@ -49,7 +49,7 @@ const getAllTasks = async (req, res) => {
         const user = await Users.findById({ _id: id });
         // console.log(usersTasks);
 
-        const tasks = await Tasks.find({ ...combinedFilter, _id: { $in: user.tasks } })
+        const tasks = await Tasks.find({ ...combinedFilter, _id: { $in: user.tasks } }).sort({ createdAt: -1 });
             .skip((page - 1) * pageSize)
             .limit(parseInt(pageSize))
             .select('title deptName deptNumber deptEmail assignedTo descriptions startDate dueDate priority status remark');
