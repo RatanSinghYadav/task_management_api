@@ -11,7 +11,7 @@ const getPublicTask = async (req, res) => {
 
         const filter = {};
 
-        if (startDate) {
+        if (startDate) { 
             filter.startDate = { $gte: startDate };
         }
         if (dueDate) {
